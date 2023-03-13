@@ -1,0 +1,34 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node ace serve --watch",
+    "build": "node ace build --production",
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.9.5",
+    "@japa/preset-adonis": "^1.2.0",
+    "@japa/runner": "^2.2.2",
+    "@types/proxy-addr": "^2.0.0",
+    "@types/source-map-support": "^0.5.6",
+    "adonis-preset-ts": "^2.1.0",
+    "pino-pretty": "^9.1.1",
+    "typescript": "^4.6.4",
+    "youch": "^3.2.2",
+    "youch-terminal": "^2.1.5"
+  },
+  "dependencies": {
+    "@adonisjs/config": "^3.0.9",
+    "@adonisjs/core": "^5.9.0",
+    "@adonisjs/lucid": "^18.3.0",
+    "@adonisjs/repl": "^3.1.11",
+    "luxon": "^3.2.1",
+    "mysql2": "^3.1.0",
+    "pg": "^8.9.0",
+    "proxy-addr": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.21"
+  }
+}
