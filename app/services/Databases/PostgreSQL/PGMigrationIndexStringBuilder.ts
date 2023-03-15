@@ -6,14 +6,15 @@ export default class PGMigrationIndexStringBuilder {
     let definition = '        table';
     const deferred = adonisSchema.IS_DEFFERABLE ? 'deferred' : 'immediate';
     const indexType = PGMigrationIndexStringBuilder.getIndexType(adonisSchema);
+    const columnName = PGMigrationIndexStringBuilder.formatColumnName(adonisSchema.COLUMN_NAME)
     if (indexType === "primary") {
-      definition = `${definition}.${indexType}(['${adonisSchema.COLUMN_NAME}'],{constraintName:'${adonisSchema.INDEX_NAME}',deferrable:'${deferred}'})`;
+      definition = `${definition}.${indexType}([${columnName}],{constraintName:'${adonisSchema.INDEX_NAME}',deferrable:'${deferred}'})`;
     }
     if (indexType === "index") {
-      definition = `${definition}.${indexType}(['${adonisSchema.COLUMN_NAME}'],'${adonisSchema.INDEX_NAME}',{indexType:'${adonisSchema.INDEX_TYPE}'})`;
+      definition = `${definition}.${indexType}([${columnName}],'${adonisSchema.INDEX_NAME}',{indexType:'${adonisSchema.INDEX_TYPE}'})`;
     }
     if (indexType === "unique") {
-      definition = `${definition}.${indexType}(['${adonisSchema.COLUMN_NAME}'],{indexName:'${adonisSchema.INDEX_NAME}',deferrable:'${deferred}'})`;
+      definition = `${definition}.${indexType}([${columnName}],{indexName:'${adonisSchema.INDEX_NAME}',deferrable:'${deferred}'})`;
     }
     return definition;
   }
@@ -26,6 +27,15 @@ export default class PGMigrationIndexStringBuilder {
       return 'index';
     }
     return 'unique';
+  }
+
+  private static formatColumnName(columnName:string) : string {
+    let arr = columnName.split(",");
+    arr = arr.map(item => {
+      item = item.replace(/^['"]+|['"]+$/g, '');
+      return "'" + item + "'";
+    });
+    return arr.join(",");
   }
 
 

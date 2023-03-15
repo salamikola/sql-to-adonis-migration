@@ -133,8 +133,16 @@ WHERE
 
   async getTableSchema(table: string): Promise<TableSchemaType[]> {
 
-    const tableSchema = await this.client.rawQuery(`select pg_enum.enumlabel, column_name, character_set_name, udt_name, data_type, character_maximum_length, column_default, is_nullable,
-        col_description((table_schema||'.'||table_name)::regclass::oid, ordinal_position) as column_comment
+    const tableSchema = await this.client.rawQuery(`select pg_enum.enumlabel, column_name, character_set_name,
+        udt_name, data_type, character_maximum_length,
+        CASE WHEN column_default LIKE '%::text%' THEN
+          trim('"' from substring(column_default from 1 for position('::text' in column_default)-1))
+        ELSE
+          trim('"' from column_default)
+        END AS column_default,
+        is_nullable,
+        col_description((table_schema||'.'||table_name)::regclass::oid, ordinal_position) as column_comment,
+        (column_default LIKE 'nextval(%'::text AND column_default NOT LIKE '%::regclass'::text) AS is_auto_increment
         from information_schema.columns c
         LEFT JOIN pg_type t ON t.typname = c.udt_name
         LEFT JOIN pg_enum ON pg_enum.enumtypid = t.oid
@@ -198,6 +206,7 @@ WHERE
       EXTRA: obj.extra ?? null,
       COLUMN_KEY: obj.column_key ?? null,
       COLLATION_NAME: obj.collation_name,
+      IS_AUTO_INCREMENT: obj.is_auto_increment
     };
 
   }

@@ -29,7 +29,8 @@ export default class PGToMigrationSchema implements MigrationSchemaContract{
       "columnType": columnDefinitions.COLUMN_TYPE,
       "comment": columnDefinitions.COLUMN_COMMENT,
       "is_enum" : typeof columnDefinitions.ENUM_VALUES != "undefined",
-      "enum_values" : columnDefinitions.ENUM_VALUES ?? null
+      "enum_values" : columnDefinitions.ENUM_VALUES ?? null,
+      "is_autoincrement":columnDefinitions.IS_AUTO_INCREMENT
     };
     return this.columnStringBuilder.buildColumn(adonisSchemaKey);
   }

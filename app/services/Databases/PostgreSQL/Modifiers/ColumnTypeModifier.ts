@@ -17,7 +17,7 @@ export default class PGColumnTypeModifier {
     'time': 'time',
     'timestamp': 'timestamp',
     'uuid': 'uuid',
-    'bytea': 'binary',
+    'byte': 'binary',
     'interval': 'interval',
     'numeric': 'decimal',
     'point': 'point',

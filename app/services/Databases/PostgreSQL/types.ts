@@ -9,6 +9,7 @@ export type PGSchemaColumnBuilderType = {
   columnType: string,
   comment: string | null,
   is_enum: boolean,
+  is_autoincrement: boolean,
   enum_values: string[] | null
 
 }

@@ -17,7 +17,8 @@ export type TableSchemaType = {
   ENUM_VALUES?: string[],
   EXTRA?: string,
   COLUMN_KEY?: string,
-  COLLATION_NAME: string
+  COLLATION_NAME: string,
+  IS_AUTO_INCREMENT:boolean
 }
 
 export type TableIndexValueType = {

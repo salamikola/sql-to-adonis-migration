@@ -47,11 +47,8 @@ export default class Alter${this.toPascalCase(sqlToMigrationContext.tableName)} 
   }
 
   public toPascalCase(word) {
-    // Split the word into individual words
     const words = word.split('_');
-    // Capitalize the first letter of each word
     const capitalizedWords = words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
-    // Join the words back together
     return capitalizedWords.join('');
   }
 
