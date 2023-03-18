@@ -10,7 +10,7 @@
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
     "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
-    "copy:files": "cpx 'templates/**' 'build/templates'",
+    "copyfiles": "cpx 'templates/**' 'build/templates'",
     "build": "npm run compile",
     "prepublishOnly": "npm run build",
     "release": "np --no-cleanup --no-tests",
@@ -83,5 +83,8 @@
   "np": {
     "contents": ".",
     "anyBranch": false
+  },
+  "dependencies": {
+    "cpx": "^1.5.0"
   }
 }
