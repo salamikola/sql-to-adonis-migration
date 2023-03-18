@@ -26,17 +26,17 @@ Or you can add it directly in your composer.json file:
 ```bash
  {
     "require": {
-        "@skolawole/adonis-sql-to-migration": "^1.0.0"
+        "@skolawole/adonis-sql-to-migration": "^1.0.2"
     }
 }
 ```
 ## Usage
 
 
-Go to the your project root terminal and register the command in your adonis project using the command 
+Go to your project root terminal and register the command in your adonis project using the command 
 
 ```
-node ace configure adonis-sql-to-migration
+node ace configure @skolawole/adonis-sql-to-migration
 
 ```
 

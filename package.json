@@ -60,7 +60,8 @@
     "pg": "^8.9.0",
     "typescript": "^4.9.5",
     "git-cz": "^4.9.0",
-    "lint": "^0.8.19"
+    "lint": "^0.8.19",
+    "cpx": "^1.5.0"
   },
   "mrmConfig": {
     "core": false,
@@ -77,14 +78,11 @@
   ],
   "adonisjs": {
     "commands": [
-      "adonis-sql-to-migration/build/commands"
+      "@skolawole/adonis-sql-to-migration/build/commands"
     ]
   },
   "np": {
     "contents": ".",
     "anyBranch": false
-  },
-  "dependencies": {
-    "cpx": "^1.5.0"
   }
 }
