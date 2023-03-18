@@ -1,5 +1,9 @@
 import {BaseCommand, flags} from '@adonisjs/core/build/standalone'
-import SqlToMigrationService from "App/services/SqlToMigrationService";
+import {DatabaseContract} from '@ioc:Adonis/Lucid/Database'
+import SqlToMigrationService from "../src/SqlToMigrationService";
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import { KernelContract } from '@adonisjs/ace/build/src/Contracts'
+import { ConfigContract } from '@ioc:Adonis/Core/Config'
 
 
 export default class SqlToMigration extends BaseCommand {
@@ -28,6 +32,8 @@ export default class SqlToMigration extends BaseCommand {
      */
     stayAlive: false,
   }
+  private config: ConfigContract
+  private dbInstance: DatabaseContract
 
   @flags.array({description: 'Exclude these table from migration generator', name: 'ignores'})
   public ignores: string[]
@@ -38,14 +44,23 @@ export default class SqlToMigration extends BaseCommand {
   @flags.array({description: 'Path to write the migration files', name: 'path'})
   public path: string
 
+  @flags.array({description: 'The name of the database to generate the migration for', name: 'dbname'})
+  public dbname: string
+
+
+
+  constructor(application: ApplicationContract, kernel: KernelContract) {
+    super(application, kernel)
+    this.config = application.container.use('Adonis/Core/Config')
+    this.dbInstance = application.container.use('Adonis/Lucid/Database')
+  }
 
   public async run() {
     try {
       const allFlags = this.getAllFlags();
-      const sqlToMigrationService = new SqlToMigrationService(allFlags);
+      const sqlToMigrationService = new SqlToMigrationService(this.config,this.dbInstance,allFlags);
       const migrationFiles = await sqlToMigrationService.handler();
-      await this.createMigrationFiles(migrationFiles);
-      this.logger.info('Hello world!')
+      await this.createMigrationFiles(migrationFiles)
     } catch (e) {
       this.logger.error(e.message)
     }

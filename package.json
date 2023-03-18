@@ -1,34 +1,84 @@
 {
-  "name": "hello-world",
+  "name": "@salamikola/adonis-sql-to-migration",
   "version": "1.0.0",
-  "private": true,
+  "description": "This package helps create your database migration from your existing database schema",
+  "main": "index.js",
   "scripts": {
-    "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js"
+    "mrm": "mrm --preset=@adonisjs/mrm-preset",
+    "lint": "eslint . --ext .ts",
+    "pretest": "npm run lint",
+    "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
+    "clean": "del-cli build",
+    "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
+    "build": "npm run compile",
+    "prepublishOnly": "npm run build",
+    "relsease" : "np --no-test --message=\"chore(release): %s\"",
+    "commit": "git-cz"
   },
-  "devDependencies": {
-    "@adonisjs/assembler": "^5.9.5",
-    "@japa/preset-adonis": "^1.2.0",
-    "@japa/runner": "^2.2.2",
-    "@types/proxy-addr": "^2.0.0",
-    "@types/source-map-support": "^0.5.6",
-    "adonis-preset-ts": "^2.1.0",
-    "pino-pretty": "^9.1.1",
-    "typescript": "^4.6.4",
-    "youch": "^3.2.2",
-    "youch-terminal": "^2.1.5"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salamikola/sql-to-adonis-migration.git"
   },
-  "dependencies": {
+  "keywords": [
+    "Adonis",
+    "5",
+    "migration",
+    "reverse migration",
+    "sql",
+    "sql to migration"
+  ],
+  "author": "Salami Kola",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/salamikola/sql-to-adonis-migration/issues"
+  },
+  "homepage": "https://github.com/salamikola/sql-to-adonis-migration#readme",
+  "peerDependencies": {
     "@adonisjs/config": "^3.0.9",
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/lucid": "^18.3.0",
+    "@adonisjs/repl": "^3.1.11"
+  },
+  "devDependencies": {
+    "@adonisjs/config": "^3.0.9",
+    "@adonisjs/core": "^5.9.0",
+    "@adonisjs/lucid": "^18.3.0",
+    "@adonisjs/mrm-preset": "^5.0.3",
     "@adonisjs/repl": "^3.1.11",
-    "luxon": "^3.2.1",
+    "@adonisjs/require-ts": "^2.0.13",
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "del-cli": "^5.0.0",
+    "eslint": "^7.31.0",
+    "mrm": "^4.1.14",
     "mysql2": "^3.1.0",
     "pg": "^8.9.0",
-    "proxy-addr": "^2.0.7",
-    "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
+    "typescript": "^4.9.5"
+  },
+  "mrmConfig": {
+    "core": false,
+    "license": "MIT",
+    "services": [],
+    "minNodeVersion": "16.13.1",
+    "probotApps": []
+  },
+  "files": [
+    "build/src",
+    "build/commands",
+    "build/index.d.ts",
+    "build/index.js"
+  ],
+  "dependencies": {
+    "lint": "^0.8.19"
+  },
+  "adonisjs": {
+    "commands": [
+      "adonis-sql-to-migration/build/commands"
+    ]
+  },
+  "np": {
+    "contents": ".",
+    "anyBranch": false
   }
 }
