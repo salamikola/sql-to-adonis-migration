@@ -73,6 +73,7 @@
     "build/index.js"
   ],
   "dependencies": {
+    "git-cz": "^4.9.0",
     "lint": "^0.8.19"
   },
   "adonisjs": {
