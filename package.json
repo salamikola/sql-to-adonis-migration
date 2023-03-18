@@ -9,7 +9,7 @@
     "pretest": "npm run lint",
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
-    "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
+    "compile": "npm run lint && npm run clean && tsc && npm run copyfiles",
     "copyfiles": "cpx 'templates/**' 'build/templates'",
     "build": "npm run compile",
     "prepublishOnly": "npm run build",
