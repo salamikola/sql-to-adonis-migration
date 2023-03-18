@@ -1,5 +1,5 @@
 {
-  "name": "@salamikola/adonis-sql-to-migration",
+  "name": "@skolawole/adonis-sql-to-migration",
   "version": "1.0.0",
   "description": "This package helps create your database migration from your existing database schema",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
     "build": "npm run compile",
     "prepublishOnly": "npm run build",
-    "relsease": "np --no-test --message=\"chore(release): %s\"",
+    "release": "np --no-test --message=\"chore(release): %s\"",
     "commit": "git-cz"
   },
   "publishConfig": {
@@ -57,7 +57,9 @@
     "mrm": "^4.1.14",
     "mysql2": "^3.1.0",
     "pg": "^8.9.0",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "git-cz": "^4.9.0",
+    "lint": "^0.8.19"
   },
   "mrmConfig": {
     "core": false,
@@ -72,10 +74,6 @@
     "build/index.d.ts",
     "build/index.js"
   ],
-  "dependencies": {
-    "git-cz": "^4.9.0",
-    "lint": "^0.8.19"
-  },
   "adonisjs": {
     "commands": [
       "adonis-sql-to-migration/build/commands"
