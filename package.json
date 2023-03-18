@@ -12,8 +12,11 @@
     "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
     "build": "npm run compile",
     "prepublishOnly": "npm run build",
-    "relsease" : "np --no-test --message=\"chore(release): %s\"",
+    "relsease": "np --no-test --message=\"chore(release): %s\"",
     "commit": "git-cz"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
