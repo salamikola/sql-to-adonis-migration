@@ -1,7 +1,7 @@
 {
   "name": "@skolawole/adonis-sql-to-migration",
   "version": "1.0.0",
-  "description": "This package helps create your database migration from your existing database schema",
+  "description": "This package helps create  database migration from  existing database schema",
   "main": "index.js",
   "scripts": {
     "mrm": "mrm --preset=@adonisjs/mrm-preset",
