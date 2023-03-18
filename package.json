@@ -12,7 +12,7 @@
     "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
     "build": "npm run compile",
     "prepublishOnly": "npm run build",
-    "release": "np --no-test --message=\"chore(release): %s\"",
+    "release": "np --no-cleanup --no-test",
     "commit": "git-cz"
   },
   "publishConfig": {
