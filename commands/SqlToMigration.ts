@@ -1,9 +1,9 @@
 import {BaseCommand, flags} from '@adonisjs/core/build/standalone'
 import {DatabaseContract} from '@ioc:Adonis/Lucid/Database'
 import SqlToMigrationService from "../src/SqlToMigrationService";
-import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import { KernelContract } from '@adonisjs/ace/build/src/Contracts'
-import { ConfigContract } from '@ioc:Adonis/Core/Config'
+import {ApplicationContract} from '@ioc:Adonis/Core/Application'
+import {KernelContract} from '@adonisjs/ace/build/src/Contracts'
+import {ConfigContract} from '@ioc:Adonis/Core/Config'
 
 
 export default class SqlToMigration extends BaseCommand {
@@ -48,7 +48,6 @@ export default class SqlToMigration extends BaseCommand {
   public dbname: string
 
 
-
   constructor(application: ApplicationContract, kernel: KernelContract) {
     super(application, kernel)
     this.config = application.container.use('Adonis/Core/Config')
@@ -57,12 +56,14 @@ export default class SqlToMigration extends BaseCommand {
 
   public async run() {
     try {
+      this.logger.info('Creating migration file...')
       const allFlags = this.getAllFlags();
-      const sqlToMigrationService = new SqlToMigrationService(this.config,this.dbInstance,allFlags);
+      const sqlToMigrationService = new SqlToMigrationService(this.config, this.dbInstance, allFlags);
       const migrationFiles = await sqlToMigrationService.handler();
-      await this.createMigrationFiles(migrationFiles)
+      await this.createMigrationFiles(migrationFiles);
+      this.logger.info(migrationFiles.length > 0 ? 'Migrations created successfully' : 'No migration created');
     } catch (e) {
-      this.logger.error(e.message)
+      this.logger.error(e.message);
     }
   }
 
@@ -74,7 +75,7 @@ export default class SqlToMigration extends BaseCommand {
         .addFile(file.fileName)
         .appRoot(this.application.appRoot)
         .destinationDir(path)
-        .stub(file.fileContent,{raw:true})
+        .stub(file.fileContent, {raw: true})
     }
     await this.generator.run()
 
